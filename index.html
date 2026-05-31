@@ -8,265 +8,116 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --black: #0a0a0a;
-      --carbon: #141414;
-      --steel: #1e1e1e;
-      --chrome: #c8c8c8;
-      --orange: #ff6a00;
-      --orange-hot: #ff4500;
-      --white: #f5f5f5;
-      --muted: #888;
+      --black: #0a0a0a; --carbon: #111; --steel: #1e1e1e;
+      --orange: #ff6a00; --white: #f5f5f5; --muted: #777;
     }
-
     html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
 
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'Barlow', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── HEADER ── */
     header {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #222;
-      padding: 0 clamp(16px, 4vw, 60px);
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
+      background: rgba(10,10,10,0.93); backdrop-filter: blur(14px);
+      border-bottom: 1px solid #1e1e1e;
+      padding: 0 clamp(16px,4vw,60px);
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
     }
-    .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 3px;
-      color: var(--white);
-      text-decoration: none;
-    }
+    .logo { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; color:var(--white); text-decoration:none; }
     .logo span { color: var(--orange); }
-    .header-tag {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
-      letter-spacing: 2px;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
+    .header-tag { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
 
-    /* ── HERO ── */
     .hero {
       position: relative;
-      padding: clamp(60px, 10vw, 120px) clamp(16px, 4vw, 60px) clamp(40px, 6vw, 80px);
+      padding: clamp(60px,10vw,120px) clamp(16px,4vw,60px) clamp(40px,6vw,80px);
       overflow: hidden;
     }
     .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(255,106,0,0.08) 0%, transparent 70%);
-      pointer-events: none;
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(255,106,0,0.07) 0%, transparent 70%);
+      pointer-events:none;
     }
     .hero-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px; letter-spacing: 4px;
-      color: var(--orange); text-transform: uppercase;
-      margin-bottom: 16px;
-      display: flex; align-items: center; gap: 10px;
+      font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:4px;
+      color:var(--orange); text-transform:uppercase; margin-bottom:16px;
+      display:flex; align-items:center; gap:10px;
     }
-    .hero-label::before {
-      content: '';
-      display: inline-block; width: 30px; height: 2px;
-      background: var(--orange);
-    }
+    .hero-label::before { content:''; width:30px; height:2px; background:var(--orange); }
     .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(52px, 10vw, 110px);
-      line-height: 0.95;
-      letter-spacing: 2px;
-      color: var(--white);
-      max-width: 700px;
+      font-family:'Bebas Neue',sans-serif;
+      font-size: clamp(52px,10vw,110px); line-height:0.95; letter-spacing:2px;
+      color:var(--white); max-width:700px;
     }
-    .hero h1 em {
-      font-style: normal;
-      -webkit-text-stroke: 1px var(--orange);
-      color: transparent;
-    }
-    .hero-sub {
-      margin-top: 24px;
-      font-size: 16px; color: var(--muted); font-weight: 300;
-      max-width: 400px; line-height: 1.6;
-    }
+    .hero h1 em { font-style:normal; -webkit-text-stroke:1px var(--orange); color:transparent; }
+    .hero-sub { margin-top:24px; font-size:16px; color:var(--muted); font-weight:300; max-width:400px; line-height:1.6; }
 
-    /* ── FILTERS ── */
     .filter-bar {
-      padding: 0 clamp(16px, 4vw, 60px) 32px;
-      display: flex; gap: 10px; flex-wrap: wrap;
-      align-items: center;
+      padding: 0 clamp(16px,4vw,60px) 32px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
     }
-    .filter-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px; letter-spacing: 2px;
-      color: var(--muted); text-transform: uppercase;
-      margin-right: 6px;
-    }
+    .filter-label { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-right:4px; }
     .filter-btn {
-      background: var(--steel);
-      border: 1px solid #2a2a2a;
-      color: var(--chrome);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px; letter-spacing: 1px;
-      padding: 6px 16px; border-radius: 2px;
-      cursor: pointer; transition: all 0.2s;
-      text-transform: uppercase;
+      background:var(--steel); border:1px solid #252525; color:#aaa;
+      font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:1px;
+      padding:6px 16px; border-radius:2px; cursor:pointer; transition:all 0.2s; text-transform:uppercase;
     }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--orange);
-      border-color: var(--orange);
-      color: #fff;
-    }
+    .filter-btn:hover, .filter-btn.active { background:var(--orange); border-color:var(--orange); color:#fff; }
 
-    /* ── PRODUCT GRID ── */
-    .grid-section {
-      padding: 0 clamp(16px, 4vw, 60px) 80px;
-    }
+    .grid-section { padding: 0 clamp(16px,4vw,60px) 80px; }
     .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px;
     }
 
-    /* ── PRODUCT CARD ── */
     .card {
-      position: relative;
-      background: var(--carbon);
-      border: 1px solid #1f1f1f;
-      border-radius: 4px;
-      overflow: hidden;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position:relative; background:var(--carbon); border:1px solid #1a1a1a;
+      border-radius:4px; overflow:hidden; cursor:pointer;
+      text-decoration:none; color:inherit; display:block;
+      transition:transform 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: var(--orange);
-      box-shadow: 0 16px 40px rgba(255,106,0,0.15);
-    }
-    .card-img-wrap {
-      position: relative;
-      width: 100%; padding-top: 72%;
-      overflow: hidden; background: #0f0f0f;
-    }
-    .card-img-wrap img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .card:hover .card-img-wrap img { transform: scale(1.06); }
+    .card:hover { transform:translateY(-6px); border-color:var(--orange); box-shadow:0 16px 40px rgba(255,106,0,0.14); }
+    .card-img-wrap { position:relative; width:100%; padding-top:72%; overflow:hidden; background:#0d0d0d; }
+    .card-img-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+    .card:hover .card-img-wrap img { transform:scale(1.06); }
 
     .badge-shopee {
-      position: absolute; top: 12px; left: 12px;
-      background: var(--orange);
-      color: #fff;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px; letter-spacing: 1.5px;
-      padding: 3px 10px; border-radius: 2px;
-      text-transform: uppercase;
+      position:absolute; top:12px; left:12px;
+      background:var(--orange); color:#fff;
+      font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:1.5px;
+      padding:3px 10px; border-radius:2px; text-transform:uppercase;
     }
     .price-badge {
-      position: absolute; bottom: 12px; right: 12px;
-      background: rgba(10,10,10,0.88);
-      border: 1px solid var(--orange);
-      color: var(--orange);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 20px; font-weight: 700;
-      padding: 4px 14px; border-radius: 2px;
-      letter-spacing: 1px;
+      position:absolute; bottom:12px; right:12px;
+      background:rgba(10,10,10,0.88); border:1px solid var(--orange); color:var(--orange);
+      font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:700;
+      padding:4px 14px; border-radius:2px; letter-spacing:1px;
     }
+    .card-body { padding:16px 18px 20px; }
+    .card-category { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; color:var(--orange); text-transform:uppercase; margin-bottom:6px; }
+    .card-name { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:600; color:var(--white); line-height:1.3; margin-bottom:8px; }
+    .card-desc { font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:14px; }
+    .card-cta { display:flex; align-items:center; gap:8px; font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:2px; color:var(--orange); text-transform:uppercase; transition:gap 0.2s; }
+    .card:hover .card-cta { gap:12px; }
+    .card-cta svg { width:16px; height:16px; }
 
-    .card-body { padding: 16px 18px 20px; }
-    .card-category {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px; letter-spacing: 2px;
-      color: var(--orange); text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .card-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px; font-weight: 600;
-      color: var(--white); line-height: 1.3;
-      margin-bottom: 8px;
-    }
-    .card-desc {
-      font-size: 13px; color: var(--muted);
-      line-height: 1.5; margin-bottom: 14px;
-    }
-    .card-cta {
-      display: flex; align-items: center; gap: 8px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px; letter-spacing: 2px;
-      color: var(--orange); text-transform: uppercase;
-      transition: gap 0.2s;
-    }
-    .card:hover .card-cta { gap: 12px; }
-    .card-cta svg { width: 16px; height: 16px; }
+    /* loading skeleton */
+    .skeleton { background: linear-gradient(90deg, #151515 25%, #1e1e1e 50%, #151515 75%); background-size: 200%; animation: shimmer 1.4s infinite; border-radius:4px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .skel-card { height:320px; }
 
-    /* ── EMPTY STATE ── */
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--muted);
-    }
-    .empty-state h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px; letter-spacing: 2px;
-      color: #333; margin-bottom: 12px;
-    }
-    .empty-state p { font-size: 14px; }
+    .empty-state { grid-column:1/-1; text-align:center; padding:80px 20px; color:var(--muted); }
+    .empty-state h3 { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:2px; color:#2a2a2a; margin-bottom:12px; }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid #1a1a1a;
-      padding: 32px clamp(16px, 4vw, 60px);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px;
-    }
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px; letter-spacing: 3px;
-    }
-    .footer-logo span { color: var(--orange); }
-    .footer-note { font-size: 12px; color: #444; }
+    footer { border-top:1px solid #161616; padding:32px clamp(16px,4vw,60px); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+    .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; }
+    .footer-logo span { color:var(--orange); }
+    .footer-note { font-size:12px; color:#333; }
 
-    /* ── ADMIN LINK ── */
-    .admin-access {
-      position: fixed; bottom: 20px; right: 20px;
-      background: var(--steel);
-      border: 1px solid #2a2a2a;
-      color: var(--muted);
-      font-size: 11px; letter-spacing: 1px;
-      padding: 8px 14px; border-radius: 2px;
-      text-decoration: none;
-      font-family: 'Barlow Condensed', sans-serif;
-      text-transform: uppercase;
-      transition: all 0.2s;
-      z-index: 50;
+    @media(max-width:600px) {
+      .products-grid { grid-template-columns:repeat(2,1fr); gap:12px; }
+      .card-body { padding:10px 12px 14px; }
+      .card-name { font-size:15px; }
+      .price-badge { font-size:16px; padding:3px 10px; }
     }
-    .admin-access:hover { border-color: var(--orange); color: var(--orange); }
-
-    @media (max-width: 600px) {
-      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .card-body { padding: 12px 12px 14px; }
-      .card-name { font-size: 15px; }
-    }
-    @media (max-width: 380px) {
-      .products-grid { grid-template-columns: 1fr; }
-    }
+    @media(max-width:380px) { .products-grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -289,10 +140,10 @@
 
 <section class="grid-section">
   <div class="products-grid" id="productsGrid">
-    <div class="empty-state">
-      <h3>Chưa có sản phẩm</h3>
-      <p>Truy cập <strong>admin.html</strong> để thêm sản phẩm đầu tiên.</p>
-    </div>
+    <!-- skeleton while loading -->
+    <div class="skeleton skel-card"></div>
+    <div class="skeleton skel-card"></div>
+    <div class="skeleton skel-card"></div>
   </div>
 </section>
 
@@ -301,26 +152,28 @@
   <span class="footer-note">© 2025 · Liên kết Shopee Affiliate</span>
 </footer>
 
-<a href="admin.html" class="admin-access">⚙ Quản lý</a>
-
 <script>
-  const STORAGE_KEY = 'autogear_products';
+  /* ── Fetch products.json (same folder) ── */
+  let allProducts = [];
+  let activeFilter = 'all';
 
-  function getProducts() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch { return []; }
+  async function loadProducts() {
+    try {
+      const res = await fetch('products.json?_=' + Date.now());
+      if (!res.ok) throw new Error('not found');
+      allProducts = await res.json();
+    } catch {
+      allProducts = [];
+    }
+    buildFilters();
+    renderGrid();
   }
 
-  function formatPrice(p) {
-    return Number(p).toLocaleString('vi-VN') + '₫';
-  }
-
-  function renderFilters(products) {
+  function buildFilters() {
     const bar = document.querySelector('.filter-bar');
-    const categories = [...new Set(products.map(p => p.category).filter(Boolean))];
-    // remove old category buttons
     bar.querySelectorAll('[data-filter]:not([data-filter="all"])').forEach(b => b.remove());
-    categories.forEach(cat => {
+    const cats = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
+    cats.forEach(cat => {
       const btn = document.createElement('button');
       btn.className = 'filter-btn';
       btn.dataset.filter = cat;
@@ -330,30 +183,30 @@
     });
   }
 
-  let activeFilter = 'all';
   function setFilter(f) {
     activeFilter = f;
-    document.querySelectorAll('.filter-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.filter === f);
-    });
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f));
     renderGrid();
   }
   document.querySelector('[data-filter="all"]').addEventListener('click', () => setFilter('all'));
 
+  function formatPrice(p) { return Number(p).toLocaleString('vi-VN') + '₫'; }
+
+  const PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%230f0f0f' width='400' height='300'/%3E%3Ctext fill='%23333' font-size='48' x='200' y='165' text-anchor='middle'%3E🚗%3C/text%3E%3C/svg%3E";
+
   function renderGrid() {
     const grid = document.getElementById('productsGrid');
-    const products = getProducts();
-    const filtered = activeFilter === 'all' ? products : products.filter(p => p.category === activeFilter);
+    const list = activeFilter === 'all' ? allProducts : allProducts.filter(p => p.category === activeFilter);
 
-    if (!filtered.length) {
-      grid.innerHTML = `<div class="empty-state"><h3>Chưa có sản phẩm</h3><p>Truy cập <strong>admin.html</strong> để thêm sản phẩm đầu tiên.</p></div>`;
+    if (!list.length) {
+      grid.innerHTML = `<div class="empty-state"><h3>Không có sản phẩm</h3><p>Chưa có sản phẩm nào trong danh mục này.</p></div>`;
       return;
     }
 
-    grid.innerHTML = filtered.map(p => `
-      <a class="card" href="${p.link}" target="_blank" rel="noopener noreferrer">
+    grid.innerHTML = list.map(p => `
+      <a class="card" href="${p.link}" target="_blank" rel="noopener noreferrer sponsored">
         <div class="card-img-wrap">
-          <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%231a1a1a%22 width=%22400%22 height=%22300%22/><text fill=%22%23444%22 font-size=%2240%22 x=%22200%22 y=%22160%22 text-anchor=%22middle%22>🚗</text></svg>'"/>
+          <img src="${p.image || PLACEHOLDER}" alt="${p.name}" loading="lazy" onerror="this.src='${PLACEHOLDER}'"/>
           <div class="badge-shopee">Shopee</div>
           ${p.price ? `<div class="price-badge">${formatPrice(p.price)}</div>` : ''}
         </div>
@@ -361,22 +214,13 @@
           ${p.category ? `<div class="card-category">${p.category}</div>` : ''}
           <div class="card-name">${p.name}</div>
           ${p.desc ? `<div class="card-desc">${p.desc}</div>` : ''}
-          <div class="card-cta">
-            Mua trên Shopee
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
+          <div class="card-cta">Mua trên Shopee <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
       </a>
     `).join('');
   }
 
-  function init() {
-    const products = getProducts();
-    renderFilters(products);
-    renderGrid();
-  }
-
-  init();
+  loadProducts();
 </script>
 </body>
 </html>
