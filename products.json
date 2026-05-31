@@ -1,29 +1,11 @@
 [
   {
-    "id": "demo1",
-    "name": "Camera hành trình Vietmap A50",
-    "category": "Camera",
-    "price": 890000,
-    "desc": "Quay 2K, góc 170°, tích hợp GPS, cảnh báo tốc độ",
-    "image": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80",
-    "link": "https://shope.ee/your-affiliate-link"
-  },
-  {
-    "id": "demo2",
-    "name": "Thảm lót sàn 5D cao su",
-    "category": "Nội thất",
-    "price": 650000,
-    "desc": "Chống nước, chống trơn, vừa khít mọi dòng xe",
-    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
-    "link": "https://shope.ee/your-affiliate-link"
-  },
-  {
-    "id": "demo3",
-    "name": "Lọc gió điều hòa than hoạt tính",
-    "category": "Lọc gió",
-    "price": 120000,
-    "desc": "Khử mùi, diệt khuẩn, thay thế dễ dàng tại nhà",
-    "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80",
-    "link": "https://shope.ee/your-affiliate-link"
+    "id": "mptz78oqmmh",
+    "name": "Vietmap Live Pro",
+    "price": 50000,
+    "link": "https://s.shopee.vn/gNLYijhhJ",
+    "image": "https://drive.google.com/file/d/1WcMC88MurB7yS7ORsePZbDOqPQoRSVSE/view?usp=drive_link",
+    "category": "",
+    "desc": ""
   }
 ]
