@@ -1,145 +1,142 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin – AutoGear</title>
+  <title>Admin – Xe 365</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black:#0a0a0a; --carbon:#111; --steel:#1a1a1a; --border:#222;
-      --orange:#ff6a00; --white:#f0f0f0; --muted:#666; --green:#22c55e; --red:#ef4444; --blue:#2563eb;
+      --navy:#0d1b3e; --navy2:#162448; --red:#e53935; --red2:#c62828;
+      --white:#ffffff; --bg:#f4f5f8; --bg2:#eef0f6; --border:#e2e5ed;
+      --text:#111827; --muted:#6b7280; --green:#16a34a; --blue:#1d4ed8;
     }
-    body { background:var(--black); color:var(--white); font-family:'Barlow',sans-serif; min-height:100vh; }
+    body { background: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif; min-height: 100vh; }
 
     header {
-      position:sticky; top:0; z-index:100;
-      background:rgba(10,10,10,0.95); backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border);
-      padding:0 clamp(16px,4vw,48px);
-      display:flex; align-items:center; justify-content:space-between; height:60px;
+      position: sticky; top: 0; z-index: 100;
+      background: var(--navy); height: 62px;
+      padding: 0 clamp(16px,4vw,40px);
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
     }
-    .logo { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:3px; }
-    .logo span { color:var(--orange); }
-    .admin-badge { background:var(--orange); color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:3px 10px; border-radius:2px; }
-    .view-site { color:var(--muted); font-size:13px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; letter-spacing:1px; text-transform:uppercase; border:1px solid var(--border); padding:6px 14px; border-radius:2px; transition:all 0.2s; }
-    .view-site:hover { border-color:var(--orange); color:var(--orange); }
+    .h-left { display: flex; align-items: center; gap: 12px; }
+    .logo-img { height: 42px; object-fit: contain; }
+    .logo-fb { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:800; color:#fff; display:none; }
+    .logo-fb span { color: var(--red); }
+    .admin-pill { background: var(--red); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 4px; letter-spacing: 1px; }
+    .view-btn { color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 700; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 6px; transition: all 0.18s; letter-spacing: 0.5px; }
+    .view-btn:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
 
-    .layout { display:grid; grid-template-columns:380px 1fr; min-height:calc(100vh - 60px); }
-    @media(max-width:860px){ .layout { grid-template-columns:1fr; } }
+    .layout { display: grid; grid-template-columns: 370px 1fr; min-height: calc(100vh - 62px); }
+    @media(max-width:840px){ .layout { grid-template-columns: 1fr; } }
 
-    /* ── FORM ── */
-    .panel-form { background:var(--carbon); border-right:1px solid var(--border); padding:28px 24px; overflow-y:auto; }
-    .panel-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; margin-bottom:20px; display:flex; align-items:center; gap:8px; }
-    .dot { width:8px; height:8px; border-radius:50%; background:var(--orange); flex-shrink:0; }
+    /* ── FORM PANEL ── */
+    .panel-form { background: var(--white); border-right: 1px solid var(--border); padding: 24px 22px; overflow-y: auto; }
+    .panel-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: 0.5px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .panel-title::before { content:''; width:4px; height:20px; background:var(--red); border-radius:2px; }
 
-    label { display:block; font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:5px; margin-top:16px; }
-    label:first-of-type { margin-top:0; }
-    input[type="text"],input[type="number"],input[type="url"],textarea {
-      width:100%; background:var(--steel); border:1px solid var(--border);
-      color:var(--white); font-family:'Barlow',sans-serif; font-size:14px;
-      padding:9px 12px; border-radius:3px; outline:none; transition:border-color 0.2s; -webkit-appearance:none;
+    label { display: block; font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; margin-top: 15px; }
+    label:first-of-type { margin-top: 0; }
+    input[type="text"], input[type="number"], input[type="url"], textarea {
+      width: 100%; background: var(--bg); border: 1.5px solid var(--border);
+      color: var(--text); font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 600;
+      padding: 9px 12px; border-radius: 8px; outline: none; transition: border-color 0.18s; -webkit-appearance: none;
     }
-    input:focus, textarea:focus { border-color:var(--orange); }
-    textarea { resize:vertical; min-height:68px; line-height:1.5; }
+    input:focus, textarea:focus { border-color: var(--navy); background: var(--white); }
+    textarea { resize: vertical; min-height: 68px; line-height: 1.55; }
 
-    .img-preview-wrap {
-      margin-top:8px; width:100%; height:150px;
-      background:var(--steel); border:1px dashed var(--border); border-radius:3px;
-      overflow:hidden; display:flex; align-items:center; justify-content:center;
-    }
-    .img-preview-wrap img { width:100%; height:100%; object-fit:cover; }
-    .img-placeholder { color:var(--muted); font-size:13px; }
-    .upload-row { display:flex; gap:8px; margin-top:8px; }
-    .upload-label { flex:1; padding:8px; background:var(--steel); border:1px solid var(--border); color:#999; font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; border-radius:3px; cursor:pointer; text-align:center; transition:all 0.2s; }
-    .upload-label:hover { border-color:var(--orange); color:var(--orange); }
-    #fileInput { display:none; }
+    .img-preview { margin-top: 8px; width: 100%; height: 148px; background: var(--bg2); border: 1.5px dashed var(--border); border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .img-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .img-ph { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .upload-row { display: flex; gap: 8px; margin-top: 7px; }
+    .upload-lbl { flex: 1; padding: 8px; background: var(--bg); border: 1.5px solid var(--border); color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; border-radius: 7px; cursor: pointer; text-align: center; transition: all 0.18s; }
+    .upload-lbl:hover { border-color: var(--navy); color: var(--navy); }
+    #fileInput { display: none; }
 
-    .btn-submit { margin-top:24px; width:100%; background:var(--orange); border:none; color:#fff; font-family:'Bebas Neue',sans-serif; font-size:19px; letter-spacing:3px; padding:13px; border-radius:3px; cursor:pointer; transition:opacity 0.2s; }
-    .btn-submit:hover { opacity:0.88; }
-    .btn-submit.editing { background:var(--blue); }
-    .cancel-btn { margin-top:8px; width:100%; background:transparent; border:1px solid var(--border); color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:1px; text-transform:uppercase; padding:9px; border-radius:3px; cursor:pointer; transition:all 0.2s; display:none; }
-    .cancel-btn:hover { border-color:var(--muted); color:var(--white); }
-    .cancel-btn.visible { display:block; }
+    .btn-add { margin-top: 22px; width: 100%; background: var(--navy); border: none; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 2px; padding: 13px; border-radius: 9px; cursor: pointer; transition: background 0.18s; }
+    .btn-add:hover { background: var(--navy2); }
+    .btn-add.editing { background: var(--blue); }
+    .btn-cancel { margin-top: 8px; width: 100%; background: transparent; border: 1.5px solid var(--border); color: var(--muted); font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; padding: 9px; border-radius: 8px; cursor: pointer; transition: all 0.18s; display: none; }
+    .btn-cancel:hover { border-color: var(--muted); color: var(--text); }
+    .btn-cancel.show { display: block; }
 
-    /* ── GITHUB INSTRUCTIONS ── */
-    .github-box {
-      margin-top:28px;
-      background:rgba(255,106,0,0.06); border:1px solid rgba(255,106,0,0.2);
-      border-radius:4px; padding:16px;
-    }
-    .github-box h4 { font-family:'Barlow Condensed',sans-serif; font-size:14px; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); margin-bottom:10px; }
-    .github-box ol { padding-left:18px; }
-    .github-box li { font-size:13px; color:#aaa; margin-bottom:6px; line-height:1.5; }
-    .github-box li strong { color:var(--white); }
-    .github-box code { background:#1a1a1a; border:1px solid #2a2a2a; border-radius:2px; padding:1px 6px; font-size:12px; color:var(--orange); }
+    /* github guide */
+    .guide-box { margin-top: 24px; background: rgba(13,27,62,0.04); border: 1.5px solid rgba(13,27,62,0.1); border-radius: 10px; padding: 16px 18px; }
+    .guide-box h4 { font-size: 12px; font-weight: 800; color: var(--navy); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .guide-box ol { padding-left: 16px; }
+    .guide-box li { font-size: 13px; color: var(--muted); margin-bottom: 6px; line-height: 1.5; font-weight: 600; }
+    .guide-box li strong { color: var(--text); }
+    .guide-box code { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 12px; color: var(--red); }
 
-    /* ── LIST ── */
-    .panel-list { padding:28px 24px; overflow-y:auto; }
-    .list-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap; gap:10px; }
-    .list-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; }
-    .count-badge { background:var(--steel); border:1px solid var(--border); font-family:'Barlow Condensed',sans-serif; font-size:12px; color:var(--muted); padding:4px 12px; border-radius:2px; }
+    /* ── LIST PANEL ── */
+    .panel-list { padding: 24px 22px; overflow-y: auto; }
+    .list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .list-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: var(--navy); }
+    .count-pill { background: var(--bg2); border: 1.5px solid var(--border); font-size: 12px; font-weight: 800; color: var(--muted); padding: 4px 12px; border-radius: 6px; }
+    .top-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .top-btn { background: var(--white); border: 1.5px solid var(--border); color: var(--muted); font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 7px; cursor: pointer; transition: all 0.18s; white-space: nowrap; letter-spacing: 0.3px; }
+    .top-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .top-btn.primary { border-color: var(--red); color: var(--red); }
+    .top-btn.primary:hover { background: var(--red); color: #fff; }
 
-    .action-row { display:flex; gap:8px; flex-wrap:wrap; }
-    .act-top-btn { background:var(--steel); border:1px solid var(--border); color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; padding:6px 14px; border-radius:2px; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
-    .act-top-btn:hover { border-color:var(--orange); color:var(--orange); }
-    .act-top-btn.primary { border-color:var(--orange); color:var(--orange); }
+    /* json panel */
+    .json-panel { display: none; margin-bottom: 18px; background: var(--white); border: 1.5px solid var(--border); border-radius: 10px; padding: 16px; }
+    .json-panel.show { display: block; }
+    .json-panel h4 { font-size: 12px; font-weight: 800; color: var(--navy); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    .json-area { width: 100%; height: 150px; background: var(--bg); border: 1.5px solid var(--border); color: var(--muted); font-family: monospace; font-size: 12px; padding: 10px; border-radius: 7px; resize: vertical; outline: none; }
+    .copy-btn { margin-top: 8px; background: var(--navy); border: none; color: #fff; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; padding: 8px 20px; border-radius: 7px; cursor: pointer; transition: background 0.18s; }
+    .copy-btn:hover { background: var(--red); }
 
-    /* copy json panel */
-    .json-panel { display:none; margin-bottom:20px; }
-    .json-panel.visible { display:block; }
-    .json-panel h4 { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:2px; color:var(--orange); text-transform:uppercase; margin-bottom:8px; }
-    .json-area { width:100%; height:160px; background:#0d0d0d; border:1px solid #222; color:#aaa; font-family:monospace; font-size:12px; padding:10px; border-radius:3px; resize:vertical; outline:none; }
-    .copy-json-btn { margin-top:6px; background:var(--orange); border:none; color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; padding:8px 20px; border-radius:2px; cursor:pointer; transition:opacity 0.2s; }
-    .copy-json-btn:hover { opacity:0.85; }
+    /* product items */
+    .prod-list { display: flex; flex-direction: column; gap: 10px; }
+    .prod-item { background: var(--white); border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start; transition: border-color 0.18s; }
+    .prod-item:hover { border-color: #c5cad8; }
+    .prod-thumb { width: 70px; height: 54px; flex-shrink: 0; border-radius: 7px; object-fit: cover; background: var(--bg2); }
+    .prod-info { flex: 1; min-width: 0; }
+    .prod-name { font-size: 14px; font-weight: 800; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .prod-meta { font-size: 12px; color: var(--muted); margin-top: 3px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .prod-price { color: var(--red); font-weight: 800; }
+    .prod-cat { background: var(--bg2); border: 1px solid var(--border); padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+    .prod-actions { display: flex; gap: 5px; flex-shrink: 0; }
+    .ab { background: var(--bg); border: 1.5px solid var(--border); color: var(--muted); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+    .ab.edit:hover { border-color: var(--blue); color: var(--blue); }
+    .ab.del:hover { border-color: var(--red); color: var(--red); }
+    .ab.mv:hover { border-color: var(--navy); color: var(--navy); }
 
-    .product-list { display:flex; flex-direction:column; gap:10px; }
-    .prod-item { background:var(--carbon); border:1px solid var(--border); border-radius:4px; padding:12px 14px; display:flex; gap:12px; align-items:flex-start; transition:border-color 0.2s; }
-    .prod-item:hover { border-color:#2a2a2a; }
-    .prod-thumb { width:68px; height:52px; flex-shrink:0; border-radius:3px; object-fit:cover; background:var(--steel); }
-    .prod-info { flex:1; min-width:0; }
-    .prod-name { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .prod-meta { font-size:12px; color:var(--muted); margin-top:3px; display:flex; gap:8px; flex-wrap:wrap; }
-    .prod-price { color:var(--orange); font-weight:600; }
-    .prod-cat { background:#1e1e1e; border:1px solid #2a2a2a; padding:1px 7px; border-radius:2px; font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; }
-    .prod-actions { display:flex; gap:5px; flex-shrink:0; margin-top:2px; }
-    .ab { background:var(--steel); border:1px solid var(--border); color:var(--muted); font-size:11px; padding:4px 10px; border-radius:2px; cursor:pointer; font-family:'Barlow Condensed',sans-serif; letter-spacing:1px; text-transform:uppercase; transition:all 0.15s; }
-    .ab.edit:hover { border-color:var(--blue); color:#60a5fa; }
-    .ab.del:hover { border-color:var(--red); color:var(--red); }
-    .ab.mv:hover { border-color:var(--orange); color:var(--orange); }
+    .empty-list { text-align: center; padding: 56px 20px; }
+    .empty-list h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; color: var(--bg2); letter-spacing: 1px; margin-bottom: 8px; }
+    .empty-list p { font-size: 13px; color: var(--muted); font-weight: 600; }
 
-    .empty-list { text-align:center; padding:60px 20px; color:var(--muted); }
-    .empty-list h3 { font-family:'Bebas Neue',sans-serif; font-size:30px; color:#1e1e1e; letter-spacing:2px; margin-bottom:8px; }
-
-    .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--green); color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:15px; letter-spacing:1px; padding:11px 26px; border-radius:3px; transition:transform 0.3s; z-index:999; white-space:nowrap; }
-    .toast.show { transform:translateX(-50%) translateY(0); }
-    .toast.error { background:var(--red); }
-    .toast.info { background:#1d4ed8; }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--green); color: #fff; font-size: 14px; font-weight: 800; padding: 11px 26px; border-radius: 8px; transition: transform 0.3s; z-index: 999; white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.err { background: var(--red); }
+    .toast.info { background: var(--blue); }
   </style>
 </head>
 <body>
 
 <header>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <span class="logo">Auto<span>Gear</span></span>
-    <span class="admin-badge">Admin</span>
+  <div class="h-left">
+    <img src="logoxe365.png" alt="Xe 365" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span class="logo-fb">XE <span>365</span></span>
+    <span class="admin-pill">ADMIN</span>
   </div>
-  <a href="index.html" class="view-site">← Xem trang</a>
+  <a href="index.html" class="view-btn">← Xem trang</a>
 </header>
 
 <div class="layout">
-
-  <!-- ── FORM ── -->
+  <!-- FORM -->
   <div class="panel-form">
-    <div class="panel-title"><span class="dot"></span><span id="formTitle">Thêm sản phẩm</span></div>
+    <div class="panel-title" id="formTitle">Thêm sản phẩm</div>
 
     <label>Tên sản phẩm *</label>
-    <input id="f-name" type="text" placeholder="VD: Camera hành trình Vietmap A50" />
+    <input id="f-name" type="text" placeholder="VD: Camera hành trình Vietmap A50"/>
 
     <label>Danh mục</label>
-    <input id="f-category" type="text" placeholder="VD: Camera, Ghế da, Lọc gió..." list="cat-list"/>
+    <input id="f-cat" type="text" placeholder="VD: Camera, Thảm lót, Lọc gió..." list="cat-list"/>
     <datalist id="cat-list"></datalist>
 
     <label>Giá (VNĐ) *</label>
@@ -152,82 +149,77 @@
     <input id="f-link" type="url" placeholder="https://shope.ee/..."/>
 
     <label>Ảnh sản phẩm</label>
-    <input id="f-image" type="url" placeholder="Dán link ảnh URL..." oninput="previewFromUrl(this.value)"/>
+    <input id="f-img" type="url" placeholder="Dán link ảnh URL từ Shopee..." oninput="previewUrl(this.value)"/>
     <div class="upload-row">
-      <label class="upload-label" for="fileInput">📁 Upload từ máy</label>
+      <label class="upload-lbl" for="fileInput">📁 Upload từ máy</label>
       <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this)"/>
     </div>
-    <div class="img-preview-wrap" id="imgPreview">
-      <span class="img-placeholder">Xem trước ảnh</span>
-    </div>
+    <div class="img-preview" id="imgPreview"><span class="img-ph">Xem trước ảnh</span></div>
 
-    <button class="btn-submit" id="submitBtn" onclick="saveProduct()">THÊM SẢN PHẨM</button>
-    <button class="cancel-btn" id="cancelBtn" onclick="cancelEdit()">Hủy chỉnh sửa</button>
+    <button class="btn-add" id="btnAdd" onclick="saveProduct()">THÊM SẢN PHẨM</button>
+    <button class="btn-cancel" id="btnCancel" onclick="cancelEdit()">Hủy chỉnh sửa</button>
 
-    <!-- GitHub guide -->
-    <div class="github-box">
-      <h4>📋 Cách cập nhật lên GitHub</h4>
+    <div class="guide-box">
+      <h4>📋 Cập nhật lên GitHub</h4>
       <ol>
-        <li>Bên phải → bấm <strong>"Xuất products.json"</strong></li>
-        <li>Vào GitHub repo → click vào file <code>products.json</code></li>
-        <li>Bấm icon ✏️ <strong>Edit</strong> (góc phải)</li>
-        <li><strong>Xóa toàn bộ</strong> nội dung cũ, dán nội dung mới vào</li>
+        <li>Bấm <strong>"Xuất products.json"</strong> bên phải</li>
+        <li>Bấm <strong>Sao chép</strong> toàn bộ nội dung</li>
+        <li>Vào GitHub → click <code>products.json</code> → ✏️ Edit</li>
+        <li><strong>Xóa hết</strong> nội dung cũ → paste mới vào</li>
         <li>Bấm <strong>Commit changes</strong> → xong!</li>
       </ol>
     </div>
   </div>
 
-  <!-- ── LIST ── -->
+  <!-- LIST -->
   <div class="panel-list">
     <div class="list-header">
       <div style="display:flex;align-items:center;gap:10px;">
-        <span class="list-title">Danh sách</span>
-        <span class="count-badge" id="countBadge">0 sản phẩm</span>
+        <span class="list-title">Danh sách sản phẩm</span>
+        <span class="count-pill" id="countPill">0 sản phẩm</span>
       </div>
-      <div class="action-row">
-        <button class="act-top-btn primary" onclick="toggleJsonPanel()">📋 Xuất products.json</button>
-        <button class="act-top-btn" onclick="importTrigger()">Nhập JSON</button>
-        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(this)"/>
+      <div class="top-btns">
+        <button class="top-btn primary" onclick="toggleJson()">📋 Xuất products.json</button>
+        <button class="top-btn" onclick="document.getElementById('importFile').click()">Nhập JSON</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJson(this)"/>
       </div>
     </div>
 
-    <!-- JSON export panel -->
     <div class="json-panel" id="jsonPanel">
-      <h4>Sao chép toàn bộ nội dung bên dưới → paste vào file products.json trên GitHub</h4>
+      <h4>Sao chép nội dung này → paste vào products.json trên GitHub</h4>
       <textarea class="json-area" id="jsonArea" readonly></textarea>
-      <button class="copy-json-btn" onclick="copyJson()">📋 Sao chép</button>
+      <button class="copy-btn" onclick="copyJson()">📋 Sao chép</button>
     </div>
 
-    <div class="product-list" id="productList"></div>
+    <div class="prod-list" id="prodList"></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-  const KEY = 'autogear_products';
-  let editingId = null;
+  const KEY = 'xe365_products';
+  let editId = null;
 
-  function getProducts() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } }
-  function saveProducts(arr) { localStorage.setItem(KEY, JSON.stringify(arr)); }
-  function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
+  const get = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+  const set = a => localStorage.setItem(KEY, JSON.stringify(a));
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,5);
 
   function toast(msg, type='') {
     const t = document.getElementById('toast');
-    t.textContent = msg; t.className = 'toast' + (type?' '+type:''); t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2600);
+    t.textContent = msg; t.className = 'toast' + (type?' '+type:'');
+    t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2800);
   }
 
   function setPreview(src) {
     const w = document.getElementById('imgPreview');
-    if (src) { w.innerHTML = `<img src="${src}" onerror="this.parentElement.innerHTML='<span class=img-placeholder>Ảnh không hợp lệ</span>'">`; }
-    else { w.innerHTML = '<span class="img-placeholder">Xem trước ảnh</span>'; }
+    w.innerHTML = src ? `<img src="${src}" onerror="this.parentElement.innerHTML='<span class=img-ph>Ảnh không hợp lệ</span>'">` : '<span class="img-ph">Xem trước ảnh</span>';
   }
-  function previewFromUrl(v) { setPreview(v); }
-  function handleFile(input) {
-    const f = input.files[0]; if (!f) return;
+  function previewUrl(v) { setPreview(v); }
+  function handleFile(inp) {
+    const f = inp.files[0]; if (!f) return;
     const r = new FileReader();
-    r.onload = e => { document.getElementById('f-image').value = e.target.result; setPreview(e.target.result); };
+    r.onload = e => { document.getElementById('f-img').value = e.target.result; setPreview(e.target.result); };
     r.readAsDataURL(f);
   }
 
@@ -235,148 +227,127 @@
     const name  = document.getElementById('f-name').value.trim();
     const price = document.getElementById('f-price').value.trim();
     const link  = document.getElementById('f-link').value.trim();
-    const image = document.getElementById('f-image').value.trim();
-    const cat   = document.getElementById('f-category').value.trim();
+    const image = document.getElementById('f-img').value.trim();
+    const cat   = document.getElementById('f-cat').value.trim();
     const desc  = document.getElementById('f-desc').value.trim();
-    if (!name)  { toast('Vui lòng nhập tên sản phẩm', 'error'); return; }
-    if (!price) { toast('Vui lòng nhập giá', 'error'); return; }
-    if (!link)  { toast('Vui lòng nhập link Shopee', 'error'); return; }
-    const prods = getProducts();
-    if (editingId) {
-      const i = prods.findIndex(p => p.id === editingId);
-      if (i !== -1) prods[i] = { id:editingId, name, price:Number(price), link, image, category:cat, desc };
+    if (!name)  { toast('Vui lòng nhập tên sản phẩm', 'err'); return; }
+    if (!price) { toast('Vui lòng nhập giá', 'err'); return; }
+    if (!link)  { toast('Vui lòng nhập link Shopee', 'err'); return; }
+    const arr = get();
+    if (editId) {
+      const i = arr.findIndex(p => p.id === editId);
+      if (i !== -1) arr[i] = { id:editId, name, price:Number(price), link, image, category:cat, desc };
       toast('✓ Đã cập nhật — nhớ xuất JSON lên GitHub!', 'info');
       cancelEdit();
     } else {
-      prods.unshift({ id:uid(), name, price:Number(price), link, image, category:cat, desc });
+      arr.unshift({ id:uid(), name, price:Number(price), link, image, category:cat, desc });
       toast('✓ Đã thêm — nhớ xuất JSON lên GitHub!', 'info');
       clearForm();
     }
-    saveProducts(prods); renderList();
+    set(arr); render();
   }
 
   function clearForm() {
-    ['f-name','f-price','f-link','f-image','f-category','f-desc'].forEach(id => document.getElementById(id).value='');
-    document.getElementById('fileInput').value='';
+    ['f-name','f-price','f-link','f-img','f-cat','f-desc'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('fileInput').value = '';
     setPreview('');
   }
   function cancelEdit() {
-    editingId = null; clearForm();
+    editId = null; clearForm();
     document.getElementById('formTitle').textContent = 'Thêm sản phẩm';
-    document.getElementById('submitBtn').textContent = 'THÊM SẢN PHẨM';
-    document.getElementById('submitBtn').classList.remove('editing');
-    document.getElementById('cancelBtn').classList.remove('visible');
+    document.getElementById('btnAdd').textContent = 'THÊM SẢN PHẨM';
+    document.getElementById('btnAdd').classList.remove('editing');
+    document.getElementById('btnCancel').classList.remove('show');
   }
 
-  function formatPrice(p) { return Number(p).toLocaleString('vi-VN') + '₫'; }
+  const fmt = p => Number(p).toLocaleString('vi-VN') + '₫';
+  const PH = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='54'%3E%3Crect fill='%23eef0f6' width='70' height='54'/%3E%3Ctext fill='%23c5cad8' font-size='24' x='35' y='33' text-anchor='middle'%3E🚗%3C/text%3E%3C/svg%3E";
 
-  function renderList() {
-    const prods = getProducts();
-    document.getElementById('countBadge').textContent = prods.length + ' sản phẩm';
-    const cats = [...new Set(prods.map(p=>p.category).filter(Boolean))];
+  function render() {
+    const arr = get();
+    document.getElementById('countPill').textContent = arr.length + ' sản phẩm';
+    const cats = [...new Set(arr.map(p=>p.category).filter(Boolean))];
     document.getElementById('cat-list').innerHTML = cats.map(c=>`<option value="${c}">`).join('');
-    const list = document.getElementById('productList');
-    if (!prods.length) {
+    const list = document.getElementById('prodList');
+    if (!arr.length) {
       list.innerHTML = '<div class="empty-list"><h3>Chưa có sản phẩm</h3><p>Điền form bên trái để bắt đầu.</p></div>';
       return;
     }
-    const PH = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='68' height='52'%3E%3Crect fill='%231a1a1a' width='68' height='52'/%3E%3Ctext fill='%23333' font-size='20' x='34' y='31' text-anchor='middle'%3E🚗%3C/text%3E%3C/svg%3E";
-    list.innerHTML = prods.map((p,i) => `
+    list.innerHTML = arr.map((p,i) => `
       <div class="prod-item">
         <img class="prod-thumb" src="${p.image||PH}" alt="" onerror="this.src='${PH}'"/>
         <div class="prod-info">
           <div class="prod-name">${p.name}</div>
           <div class="prod-meta">
-            <span class="prod-price">${formatPrice(p.price)}</span>
+            <span class="prod-price">${fmt(p.price)}</span>
             ${p.category?`<span class="prod-cat">${p.category}</span>`:''}
-            ${p.desc?`<span>${p.desc.slice(0,45)}${p.desc.length>45?'…':''}</span>`:''}
+            ${p.desc?`<span>${p.desc.slice(0,48)}${p.desc.length>48?'…':''}</span>`:''}
           </div>
         </div>
         <div class="prod-actions">
-          ${i>0?`<button class="ab mv" onclick="move('${p.id}',-1)">↑</button>`:''}
-          ${i<prods.length-1?`<button class="ab mv" onclick="move('${p.id}',1)">↓</button>`:''}
+          ${i>0?`<button class="ab mv" onclick="mv('${p.id}',-1)">↑</button>`:''}
+          ${i<arr.length-1?`<button class="ab mv" onclick="mv('${p.id}',1)">↓</button>`:''}
           <button class="ab edit" onclick="editProd('${p.id}')">Sửa</button>
           <button class="ab del" onclick="delProd('${p.id}')">Xóa</button>
         </div>
       </div>
     `).join('');
-    // refresh json panel if open
-    if (document.getElementById('jsonPanel').classList.contains('visible')) refreshJsonArea();
+    if (document.getElementById('jsonPanel').classList.contains('show')) refreshJson();
   }
 
   function editProd(id) {
-    const p = getProducts().find(x=>x.id===id); if (!p) return;
-    editingId = id;
+    const p = get().find(x=>x.id===id); if (!p) return;
+    editId = id;
     document.getElementById('f-name').value = p.name||'';
     document.getElementById('f-price').value = p.price||'';
     document.getElementById('f-link').value = p.link||'';
-    document.getElementById('f-image').value = p.image||'';
-    document.getElementById('f-category').value = p.category||'';
+    document.getElementById('f-img').value = p.image||'';
+    document.getElementById('f-cat').value = p.category||'';
     document.getElementById('f-desc').value = p.desc||'';
     setPreview(p.image||'');
     document.getElementById('formTitle').textContent = 'Chỉnh sửa sản phẩm';
-    document.getElementById('submitBtn').textContent = 'LƯU THAY ĐỔI';
-    document.getElementById('submitBtn').classList.add('editing');
-    document.getElementById('cancelBtn').classList.add('visible');
+    document.getElementById('btnAdd').textContent = 'LƯU THAY ĐỔI';
+    document.getElementById('btnAdd').classList.add('editing');
+    document.getElementById('btnCancel').classList.add('show');
     document.querySelector('.panel-form').scrollIntoView({behavior:'smooth'});
   }
 
   function delProd(id) {
     if (!confirm('Xóa sản phẩm này?')) return;
-    saveProducts(getProducts().filter(p=>p.id!==id));
-    renderList(); toast('Đã xóa sản phẩm');
+    set(get().filter(p=>p.id!==id)); render(); toast('Đã xóa sản phẩm');
   }
 
-  function move(id, dir) {
-    const arr = getProducts();
-    const i = arr.findIndex(p=>p.id===id), j=i+dir;
+  function mv(id, dir) {
+    const arr = get(); const i = arr.findIndex(p=>p.id===id); const j=i+dir;
     if (j<0||j>=arr.length) return;
-    [arr[i],arr[j]]=[arr[j],arr[i]];
-    saveProducts(arr); renderList();
+    [arr[i],arr[j]]=[arr[j],arr[i]]; set(arr); render();
   }
 
-  /* ── JSON export ── */
-  function refreshJsonArea() {
-    document.getElementById('jsonArea').value = JSON.stringify(getProducts(), null, 2);
-  }
-  function toggleJsonPanel() {
-    const panel = document.getElementById('jsonPanel');
-    panel.classList.toggle('visible');
-    if (panel.classList.contains('visible')) refreshJsonArea();
+  function refreshJson() { document.getElementById('jsonArea').value = JSON.stringify(get(), null, 2); }
+  function toggleJson() {
+    const p = document.getElementById('jsonPanel'); p.classList.toggle('show');
+    if (p.classList.contains('show')) refreshJson();
   }
   function copyJson() {
-    const area = document.getElementById('jsonArea');
-    navigator.clipboard.writeText(area.value).then(() => toast('✓ Đã sao chép! Paste vào GitHub')).catch(() => { area.select(); document.execCommand('copy'); toast('✓ Đã sao chép!'); });
+    const a = document.getElementById('jsonArea');
+    navigator.clipboard.writeText(a.value).then(()=>toast('✓ Đã sao chép! Paste vào GitHub')).catch(()=>{ a.select(); document.execCommand('copy'); toast('✓ Đã sao chép!'); });
+  }
+  function importJson(inp) {
+    const f=inp.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=e=>{ try{ const arr=JSON.parse(e.target.result); if(!Array.isArray(arr)) throw 0; set(arr); render(); toast('✓ Đã nhập '+arr.length+' sản phẩm'); }catch{ toast('File JSON không hợp lệ','err'); } };
+    r.readAsText(f); inp.value='';
   }
 
-  /* ── Import ── */
-  function importTrigger() { document.getElementById('importFile').click(); }
-  function importData(input) {
-    const f = input.files[0]; if (!f) return;
-    const r = new FileReader();
-    r.onload = e => {
-      try {
-        const arr = JSON.parse(e.target.result);
-        if (!Array.isArray(arr)) throw 0;
-        saveProducts(arr); renderList();
-        toast('✓ Đã nhập ' + arr.length + ' sản phẩm');
-      } catch { toast('File JSON không hợp lệ', 'error'); }
-    };
-    r.readAsText(f); input.value='';
-  }
-
-  /* ── Load products.json from server (if available) into localStorage on first visit ── */
-  async function syncFromServer() {
-    if (localStorage.getItem(KEY)) return; // already have local data
+  async function syncServer() {
+    if (localStorage.getItem(KEY)) return;
     try {
-      const res = await fetch('products.json?_='+Date.now());
-      if (!res.ok) return;
-      const arr = await res.json();
-      if (Array.isArray(arr) && arr.length) { saveProducts(arr); renderList(); }
+      const r = await fetch('products.json?_='+Date.now()); if (!r.ok) return;
+      const arr = await r.json(); if (Array.isArray(arr)&&arr.length) { set(arr); render(); }
     } catch {}
   }
 
-  syncFromServer().then(() => renderList());
+  syncServer().then(()=>render());
 </script>
 </body>
 </html>

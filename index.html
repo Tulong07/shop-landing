@@ -1,185 +1,303 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AutoGear – Phụ kiện ô tô chính hãng</title>
+  <title>Xe 365 – Nâng cấp xế yêu của bạn</title>
+  <meta name="description" content="Tổng hợp phụ kiện ô tô chất lượng, giá vừa phải. Mua ngay trên Shopee."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --black: #0a0a0a; --carbon: #111; --steel: #1e1e1e;
-      --orange: #ff6a00; --white: #f5f5f5; --muted: #777;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
 
+    :root {
+      --navy:   #0d1b3e;
+      --navy2:  #162448;
+      --red:    #e53935;
+      --red2:   #c62828;
+      --white:  #ffffff;
+      --bg:     #f4f5f8;
+      --bg2:    #eef0f6;
+      --border: #e2e5ed;
+      --text:   #111827;
+      --muted:  #6b7280;
+      --card-shadow: 0 4px 16px rgba(13,27,62,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif; overflow-x: hidden; }
+
+    /* ── HEADER ── */
     header {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,10,0.93); backdrop-filter: blur(14px);
-      border-bottom: 1px solid #1e1e1e;
-      padding: 0 clamp(16px,4vw,60px);
-      display: flex; align-items: center; justify-content: space-between; height: 64px;
+      background: var(--navy);
+      height: 66px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(16px, 4vw, 56px);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
     }
-    .logo { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; color:var(--white); text-decoration:none; }
-    .logo span { color: var(--orange); }
-    .header-tag { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+    .logo-img { height: 46px; width: auto; object-fit: contain; display: block; }
+    .logo-text-fallback { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 800; color: #fff; letter-spacing: 1px; display: none; }
+    .logo-text-fallback span { color: var(--red); }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .header-slogan { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; }
+    @media(max-width:540px){ .header-slogan { display: none; } }
 
+    /* ── HERO ── */
     .hero {
-      position: relative;
-      padding: clamp(60px,10vw,120px) clamp(16px,4vw,60px) clamp(40px,6vw,80px);
-      overflow: hidden;
+      background: var(--white);
+      border-bottom: 3px solid var(--red);
+      display: flex; align-items: center;
+      padding: clamp(32px,5vw,56px) clamp(16px,4vw,56px);
+      gap: 32px; overflow: hidden; position: relative;
     }
     .hero::before {
-      content:''; position:absolute; inset:0;
-      background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(255,106,0,0.07) 0%, transparent 70%);
-      pointer-events:none;
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, rgba(13,27,62,0.03) 0%, transparent 55%);
+      pointer-events: none;
     }
-    .hero-label {
-      font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:4px;
-      color:var(--orange); text-transform:uppercase; margin-bottom:16px;
-      display:flex; align-items:center; gap:10px;
+    /* diagonal stripe accent */
+    .hero::after {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 45%; height: 100%;
+      background: linear-gradient(105deg, transparent 40%, var(--bg) 40%);
+      pointer-events: none;
     }
-    .hero-label::before { content:''; width:30px; height:2px; background:var(--orange); }
+    .hero-content { flex: 1; z-index: 2; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(229,57,53,0.08); border: 1px solid rgba(229,57,53,0.25);
+      border-radius: 4px; padding: 4px 12px; margin-bottom: 16px;
+    }
+    .hero-eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
+    .hero-eyebrow span { font-size: 11px; color: var(--red); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
     .hero h1 {
-      font-family:'Bebas Neue',sans-serif;
-      font-size: clamp(52px,10vw,110px); line-height:0.95; letter-spacing:2px;
-      color:var(--white); max-width:700px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800; line-height: 1.1;
+      color: var(--navy); margin-bottom: 12px;
     }
-    .hero h1 em { font-style:normal; -webkit-text-stroke:1px var(--orange); color:transparent; }
-    .hero-sub { margin-top:24px; font-size:16px; color:var(--muted); font-weight:300; max-width:400px; line-height:1.6; }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 400px; margin-bottom: 24px; }
+    .hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+    .hero-stat { }
+    .hero-stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; color: var(--navy); }
+    .hero-stat-lbl { font-size: 11px; color: var(--muted); margin-top: 1px; }
+    .hero-logo { flex-shrink: 0; z-index: 2; }
+    .hero-logo img { height: clamp(100px, 14vw, 150px); width: auto; object-fit: contain; filter: drop-shadow(0 4px 20px rgba(13,27,62,0.15)); }
+    @media(max-width:560px) { .hero-logo { display: none; } .hero::after { display: none; } }
 
-    .filter-bar {
-      padding: 0 clamp(16px,4vw,60px) 32px;
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    /* ── RED STRIP ── */
+    .strip {
+      background: var(--red);
+      padding: 10px clamp(16px,4vw,56px);
+      display: flex; gap: clamp(16px,4vw,40px); overflow: hidden; flex-wrap: wrap;
     }
-    .filter-label { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-right:4px; }
+    .strip-item { display: flex; align-items: center; gap: 7px; }
+    .strip-item svg { width: 15px; height: 15px; stroke: rgba(255,255,255,0.85); fill: none; stroke-width: 2.2; flex-shrink: 0; }
+    .strip-item span { font-size: 12px; color: rgba(255,255,255,0.92); font-weight: 700; white-space: nowrap; letter-spacing: 0.3px; }
+
+    /* ── FILTER BAR ── */
+    .filter-wrap {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 14px clamp(16px,4vw,56px);
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .filter-label { font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-right: 4px; }
     .filter-btn {
-      background:var(--steel); border:1px solid #252525; color:#aaa;
-      font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:1px;
-      padding:6px 16px; border-radius:2px; cursor:pointer; transition:all 0.2s; text-transform:uppercase;
+      background: var(--bg); border: 1.5px solid var(--border);
+      color: var(--muted); font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 700;
+      padding: 5px 14px; border-radius: 6px; cursor: pointer; transition: all 0.18s;
     }
-    .filter-btn:hover, .filter-btn.active { background:var(--orange); border-color:var(--orange); color:#fff; }
+    .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .filter-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
 
-    .grid-section { padding: 0 clamp(16px,4vw,60px) 80px; }
-    .products-grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px;
+    /* ── SECTION ── */
+    .section { padding: clamp(20px,3vw,32px) clamp(16px,4vw,56px) clamp(24px,4vw,40px); }
+    .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px; font-weight: 800; color: var(--navy);
+      display: flex; align-items: center; gap: 10px; letter-spacing: 0.5px;
     }
+    .section-title::before { content: ''; width: 4px; height: 22px; background: var(--red); border-radius: 2px; }
 
+    /* ── PRODUCT GRID ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+
+    /* ── CARD ── */
     .card {
-      position:relative; background:var(--carbon); border:1px solid #1a1a1a;
-      border-radius:4px; overflow:hidden; cursor:pointer;
-      text-decoration:none; color:inherit; display:block;
-      transition:transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      background: var(--white); border-radius: 14px;
+      border: 1.5px solid var(--border);
+      overflow: hidden; cursor: pointer;
+      text-decoration: none; color: inherit; display: block;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
     }
-    .card:hover { transform:translateY(-6px); border-color:var(--orange); box-shadow:0 16px 40px rgba(255,106,0,0.14); }
-    .card-img-wrap { position:relative; width:100%; padding-top:72%; overflow:hidden; background:#0d0d0d; }
-    .card-img-wrap img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
-    .card:hover .card-img-wrap img { transform:scale(1.06); }
-
+    .card:hover { transform: translateY(-5px); border-color: var(--navy); box-shadow: 0 12px 32px rgba(13,27,62,0.13); }
+    .card-img-wrap { position: relative; width: 100%; padding-top: 68%; overflow: hidden; background: var(--bg2); }
+    .card-img-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s; }
+    .card:hover .card-img-wrap img { transform: scale(1.06); }
     .badge-shopee {
-      position:absolute; top:12px; left:12px;
-      background:var(--orange); color:#fff;
-      font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:1.5px;
-      padding:3px 10px; border-radius:2px; text-transform:uppercase;
+      position: absolute; top: 10px; left: 10px;
+      background: var(--navy); color: #fff;
+      font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 4px; letter-spacing: 1px;
     }
-    .price-badge {
-      position:absolute; bottom:12px; right:12px;
-      background:rgba(10,10,10,0.88); border:1px solid var(--orange); color:var(--orange);
-      font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:700;
-      padding:4px 14px; border-radius:2px; letter-spacing:1px;
+    .badge-price {
+      position: absolute; bottom: 10px; right: 10px;
+      background: var(--red); color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px; font-weight: 800; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.5px;
     }
-    .card-body { padding:16px 18px 20px; }
-    .card-category { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; color:var(--orange); text-transform:uppercase; margin-bottom:6px; }
-    .card-name { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:600; color:var(--white); line-height:1.3; margin-bottom:8px; }
-    .card-desc { font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:14px; }
-    .card-cta { display:flex; align-items:center; gap:8px; font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:2px; color:var(--orange); text-transform:uppercase; transition:gap 0.2s; }
-    .card:hover .card-cta { gap:12px; }
-    .card-cta svg { width:16px; height:16px; }
+    .card-body { padding: 13px 14px 15px; }
+    .card-cat { font-size: 10px; font-weight: 800; color: var(--red); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
+    .card-name { font-size: 14px; font-weight: 800; color: var(--navy); line-height: 1.35; margin-bottom: 5px; }
+    .card-desc { font-size: 12px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+    .card-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      width: 100%; background: var(--navy); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800;
+      padding: 9px; border-radius: 8px; border: none; cursor: pointer;
+      transition: background 0.18s;
+    }
+    .card-btn:hover { background: var(--red); }
+    .card-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-    /* loading skeleton */
-    .skeleton { background: linear-gradient(90deg, #151515 25%, #1e1e1e 50%, #151515 75%); background-size: 200%; animation: shimmer 1.4s infinite; border-radius:4px; }
+    /* ── EMPTY ── */
+    .empty { grid-column: 1/-1; text-align: center; padding: 64px 20px; }
+    .empty h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; color: var(--bg2); letter-spacing: 1px; margin-bottom: 8px; }
+    .empty p { font-size: 13px; color: var(--muted); }
+
+    /* skeleton */
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-    .skel-card { height:320px; }
+    .skel { background: linear-gradient(90deg,#e8eaf0 25%,#f4f5f8 50%,#e8eaf0 75%); background-size: 200%; animation: shimmer 1.4s infinite; border-radius: 14px; height: 260px; }
 
-    .empty-state { grid-column:1/-1; text-align:center; padding:80px 20px; color:var(--muted); }
-    .empty-state h3 { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:2px; color:#2a2a2a; margin-bottom:12px; }
-
-    footer { border-top:1px solid #161616; padding:32px clamp(16px,4vw,60px); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
-    .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; }
-    .footer-logo span { color:var(--orange); }
-    .footer-note { font-size:12px; color:#333; }
-
-    @media(max-width:600px) {
-      .products-grid { grid-template-columns:repeat(2,1fr); gap:12px; }
-      .card-body { padding:10px 12px 14px; }
-      .card-name { font-size:15px; }
-      .price-badge { font-size:16px; padding:3px 10px; }
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); margin-top: 16px;
+      padding: clamp(20px,3vw,32px) clamp(16px,4vw,56px);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
     }
-    @media(max-width:380px) { .products-grid { grid-template-columns:1fr; } }
+    .footer-logo { height: 38px; width: auto; object-fit: contain; }
+    .footer-logo-fallback { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: #fff; display: none; }
+    .footer-logo-fallback span { color: var(--red); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.18s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-note { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+    @media(max-width:480px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .card-body { padding: 10px 11px 12px; }
+      .card-name { font-size: 13px; }
+    }
   </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <a href="index.html" class="logo">Auto<span>Gear</span></a>
-  <span class="header-tag">Phụ kiện ô tô</span>
+  <a href="index.html">
+    <img src="logoxe365.png" alt="Xe 365" class="logo-img"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span class="logo-text-fallback">XE <span>365</span></span>
+  </a>
+  <div class="header-right">
+    <span class="header-slogan">Nâng cấp xế yêu của bạn</span>
+  </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-label">Shopee Affiliate</div>
-  <h1>PHỤ KIỆN<br/>XE HƠI <em>GIÁ TỐT</em></h1>
-  <p class="hero-sub">Tổng hợp phụ kiện ô tô chất lượng, giá vừa phải — click để mua ngay trên Shopee.</p>
-</section>
-
-<div class="filter-bar">
-  <span class="filter-label">Lọc:</span>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-</div>
-
-<section class="grid-section">
-  <div class="products-grid" id="productsGrid">
-    <!-- skeleton while loading -->
-    <div class="skeleton skel-card"></div>
-    <div class="skeleton skel-card"></div>
-    <div class="skeleton skel-card"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span><span>Cập nhật hàng tuần</span></div>
+    <h1>Nâng cấp xế yêu<br/>của bạn — <em>giá tốt</em></h1>
+    <p class="hero-sub">Tổng hợp phụ kiện ô tô chất lượng, giá vừa phải. Click vào sản phẩm để mua ngay trên Shopee.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" id="heroCount">0+</div><div class="hero-stat-lbl">Sản phẩm</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-lbl">Từ Shopee</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Miễn phí</div><div class="hero-stat-lbl">Tư vấn</div></div>
+    </div>
+  </div>
+  <div class="hero-logo">
+    <img src="logoxe365.png" alt="Xe 365 logo"/>
   </div>
 </section>
 
+<!-- RED STRIP -->
+<div class="strip">
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+    <span>Hàng chính hãng</span>
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    <span>Giao hàng nhanh</span>
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <span>Bảo hành đầy đủ</span>
+  </div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <span>Được yêu thích</span>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-wrap">
+  <span class="filter-label">Danh mục:</span>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-title">Sản phẩm nổi bật</div>
+  </div>
+  <div class="grid" id="grid">
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Auto<span>Gear</span></div>
-  <span class="footer-note">© 2025 · Liên kết Shopee Affiliate</span>
+  <div>
+    <img src="logoxe365.png" alt="Xe 365" class="footer-logo"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span class="footer-logo-fallback">XE <span>365</span></span>
+  </div>
+  <div class="footer-note">© 2025 Xe365 · Liên kết Shopee Affiliate</div>
 </footer>
 
 <script>
-  /* ── Fetch products.json (same folder) ── */
   let allProducts = [];
   let activeFilter = 'all';
 
   async function loadProducts() {
     try {
-      const res = await fetch('products.json?_=' + Date.now());
-      if (!res.ok) throw new Error('not found');
-      allProducts = await res.json();
-    } catch {
-      allProducts = [];
-    }
+      const r = await fetch('products.json?_=' + Date.now());
+      if (!r.ok) throw 0;
+      allProducts = await r.json();
+    } catch { allProducts = []; }
     buildFilters();
     renderGrid();
+    const c = document.getElementById('heroCount');
+    if (c && allProducts.length) c.textContent = allProducts.length + '+';
   }
 
   function buildFilters() {
-    const bar = document.querySelector('.filter-bar');
+    const bar = document.querySelector('.filter-wrap');
     bar.querySelectorAll('[data-filter]:not([data-filter="all"])').forEach(b => b.remove());
-    const cats = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
-    cats.forEach(cat => {
+    [...new Set(allProducts.map(p => p.category).filter(Boolean))].forEach(cat => {
       const btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.dataset.filter = cat;
-      btn.textContent = cat;
-      bar.appendChild(btn);
+      btn.className = 'filter-btn'; btn.dataset.filter = cat; btn.textContent = cat;
       btn.addEventListener('click', () => setFilter(cat));
+      bar.appendChild(btn);
     });
   }
 
@@ -190,31 +308,32 @@
   }
   document.querySelector('[data-filter="all"]').addEventListener('click', () => setFilter('all'));
 
-  function formatPrice(p) { return Number(p).toLocaleString('vi-VN') + '₫'; }
+  function fmt(p) { return Number(p).toLocaleString('vi-VN') + '₫'; }
 
-  const PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%230f0f0f' width='400' height='300'/%3E%3Ctext fill='%23333' font-size='48' x='200' y='165' text-anchor='middle'%3E🚗%3C/text%3E%3C/svg%3E";
+  const PH = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='280'%3E%3Crect fill='%23eef0f6' width='400' height='280'/%3E%3Ctext fill='%23c5cad8' font-size='52' x='200' y='152' text-anchor='middle' font-family='Arial'%3E🚗%3C/text%3E%3C/svg%3E";
 
   function renderGrid() {
-    const grid = document.getElementById('productsGrid');
+    const grid = document.getElementById('grid');
     const list = activeFilter === 'all' ? allProducts : allProducts.filter(p => p.category === activeFilter);
-
     if (!list.length) {
-      grid.innerHTML = `<div class="empty-state"><h3>Không có sản phẩm</h3><p>Chưa có sản phẩm nào trong danh mục này.</p></div>`;
+      grid.innerHTML = `<div class="empty"><h3>Chưa có sản phẩm</h3><p>Vui lòng quay lại sau.</p></div>`;
       return;
     }
-
     grid.innerHTML = list.map(p => `
       <a class="card" href="${p.link}" target="_blank" rel="noopener noreferrer sponsored">
         <div class="card-img-wrap">
-          <img src="${p.image || PLACEHOLDER}" alt="${p.name}" loading="lazy" onerror="this.src='${PLACEHOLDER}'"/>
-          <div class="badge-shopee">Shopee</div>
-          ${p.price ? `<div class="price-badge">${formatPrice(p.price)}</div>` : ''}
+          <img src="${p.image || PH}" alt="${p.name}" loading="lazy" onerror="this.src='${PH}'"/>
+          <div class="badge-shopee">SHOPEE</div>
+          ${p.price ? `<div class="badge-price">${fmt(p.price)}</div>` : ''}
         </div>
         <div class="card-body">
-          ${p.category ? `<div class="card-category">${p.category}</div>` : ''}
+          ${p.category ? `<div class="card-cat">${p.category}</div>` : ''}
           <div class="card-name">${p.name}</div>
           ${p.desc ? `<div class="card-desc">${p.desc}</div>` : ''}
-          <div class="card-cta">Mua trên Shopee <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <button class="card-btn" onclick="return false">
+            Mua trên Shopee
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
         </div>
       </a>
     `).join('');
