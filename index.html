@@ -87,6 +87,23 @@
     .hero-stat-lbl { font-size: 11px; color: var(--muted); margin-top: 1px; }
     .hero-logo { flex-shrink: 0; z-index: 2; }
     .hero-logo img { height: clamp(100px, 14vw, 150px); width: auto; object-fit: contain; filter: drop-shadow(0 4px 20px rgba(13,27,62,0.15)); }
+
+    /* center car illustration */
+    .hero-visual { flex: 1.2; display: flex; align-items: center; justify-content: center; z-index: 2; position: relative; min-width: 0; }
+    .hero-car { width: 100%; max-width: 420px; height: auto; }
+    .hero-car .speed { stroke: var(--red); stroke-linecap: round; opacity: 0; animation: speedIn 0.6s ease forwards; }
+    .hero-car .speed:nth-child(1) { animation-delay: 0.3s; }
+    .hero-car .speed:nth-child(2) { animation-delay: 0.42s; }
+    .hero-car .speed:nth-child(3) { animation-delay: 0.54s; }
+    .hero-car .car-body { opacity: 0; animation: carIn 0.7s cubic-bezier(.2,.7,.3,1) 0.15s forwards; }
+    .hero-car .wheel { transform-origin: center; }
+    .hero-car .wheel-spin { animation: spin 1.6s linear infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes carIn { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes speedIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 0.85; transform: translateX(0); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media(prefers-reduced-motion: reduce) { .hero-car * { animation: none !important; opacity: 1 !important; } }
+
+    @media(max-width:860px) { .hero-visual { display: none; } }
     @media(max-width:560px) { .hero-logo { display: none; } .hero::after { display: none; } }
 
     /* ── RED STRIP ── */
@@ -222,6 +239,64 @@
       <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-lbl">Từ Shopee</div></div>
       <div class="hero-stat"><div class="hero-stat-num">Miễn phí</div><div class="hero-stat-lbl">Tư vấn</div></div>
     </div>
+  </div>
+  <div class="hero-visual">
+    <svg class="hero-car" viewBox="0 0 440 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- speed lines -->
+      <line class="speed" x1="10" y1="95"  x2="95" y2="95"  stroke-width="5"/>
+      <line class="speed" x1="0"  y1="120" x2="78" y2="120" stroke-width="6"/>
+      <line class="speed" x1="18" y1="145" x2="88" y2="145" stroke-width="4"/>
+
+      <g class="car-body">
+        <!-- shadow -->
+        <ellipse cx="240" cy="185" rx="160" ry="13" fill="#0d1b3e" opacity="0.08"/>
+        <!-- body -->
+        <path d="M95 165 L112 120 Q118 104 138 100 L185 92 Q205 70 240 68 L300 70 Q330 72 352 100 L392 112 Q410 118 412 138 L414 160 Q414 168 405 168 L104 168 Q95 168 95 165 Z"
+              fill="#0d1b3e"/>
+        <!-- side accent -->
+        <path d="M120 158 L134 122 Q139 110 154 107 L300 99 Q326 100 344 120 L300 130 L150 140 Z" fill="#162448"/>
+        <!-- windows -->
+        <path d="M196 92 Q210 76 238 75 L286 77 Q304 80 318 96 L300 99 L210 104 Z" fill="#4a6fa5"/>
+        <path d="M200 96 L236 80 L256 80 L250 100 Z" fill="#6c93cc"/>
+        <path d="M262 81 L284 82 Q298 84 308 96 L268 99 Z" fill="#6c93cc"/>
+        <!-- red stripe -->
+        <path d="M104 150 L410 142 L410 150 L104 156 Z" fill="#e53935"/>
+        <!-- headlight -->
+        <path d="M404 130 L413 134 Q416 136 415 142 L405 142 Z" fill="#ffd54f"/>
+        <!-- door line -->
+        <path d="M250 102 L246 158" stroke="#2a3a5e" stroke-width="2"/>
+        <!-- handle -->
+        <rect x="270" y="124" width="16" height="4" rx="2" fill="#3a4d75"/>
+      </g>
+
+      <!-- wheels -->
+      <g class="wheel">
+        <circle cx="160" cy="168" r="30" fill="#1a1a1a"/>
+        <circle cx="160" cy="168" r="30" fill="none" stroke="#000" stroke-width="2"/>
+        <g class="wheel-spin">
+          <circle cx="160" cy="168" r="15" fill="#c5c9d1"/>
+          <circle cx="160" cy="168" r="5" fill="#7a8294"/>
+          <g stroke="#7a8294" stroke-width="3">
+            <line x1="160" y1="168" x2="160" y2="154"/>
+            <line x1="160" y1="168" x2="173" y2="176"/>
+            <line x1="160" y1="168" x2="147" y2="176"/>
+          </g>
+        </g>
+      </g>
+      <g class="wheel">
+        <circle cx="340" cy="168" r="30" fill="#1a1a1a"/>
+        <circle cx="340" cy="168" r="30" fill="none" stroke="#000" stroke-width="2"/>
+        <g class="wheel-spin">
+          <circle cx="340" cy="168" r="15" fill="#c5c9d1"/>
+          <circle cx="340" cy="168" r="5" fill="#7a8294"/>
+          <g stroke="#7a8294" stroke-width="3">
+            <line x1="340" y1="168" x2="340" y2="154"/>
+            <line x1="340" y1="168" x2="353" y2="176"/>
+            <line x1="340" y1="168" x2="327" y2="176"/>
+          </g>
+        </g>
+      </g>
+    </svg>
   </div>
   <div class="hero-logo">
     <img src="logoxe365.png" alt="Xe 365 logo"/>
